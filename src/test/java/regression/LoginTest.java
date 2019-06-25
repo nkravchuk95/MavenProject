@@ -14,7 +14,7 @@ public class LoginTest extends BrowserFactory {
     BoardsPage boardsPage = new BoardsPage();
 
     @Test
-    public void login() throws InterruptedException {
+    public void login() {
         loginPage.open();
         loginPage.login("loliktestintegration@gmail.com", "iLoveBieber");
         boardsPage.openBoard("jacksparrowtitle");
