@@ -8,6 +8,14 @@
     <artifactId>com.trello</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <properties>
+        <buildDirectory>${project.basedir}/target</buildDirectory>
+        <allure.results.directory>${buildDirectory}/allure-results</allure.results.directory>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <allure.version>2.12.1</allure.version>
+        <aspectj.version>1.8.3</aspectj.version>
+        <suite>test.xml</suite>
+    </properties>
 
     <build>
         <plugins>
@@ -19,6 +27,30 @@
                     <target>8</target>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.20</version>
+                <configuration>
+                    <argLine>
+                        -javaagent:${settings.localRepository}/org/aspectj/aspectjweaver/${aspectj.version}/aspectjweaver-${aspectj.version}.jar
+                    </argLine>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>${suite}</suiteXmlFile>
+                    </suiteXmlFiles>
+                </configuration>
+
+                <dependencies>
+                    <dependency>
+                        <groupId>org.aspectj</groupId>
+                        <artifactId>aspectjweaver</artifactId>
+                        <version>${aspectj.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+
+
         </plugins>
     </build>
 
@@ -68,9 +100,14 @@
             <version>1.7.25</version>
         </dependency>
 
+        <!-- https://mvnrepository.com/artifact/io.qameta.allure/allure-testng -->
+        <dependency>
+            <groupId>io.qameta.allure</groupId>
+            <artifactId>allure-testng</artifactId>
+            <version>2.12.1</version>
+        </dependency>
+
     </dependencies>
-
-
 
 
 </project>
